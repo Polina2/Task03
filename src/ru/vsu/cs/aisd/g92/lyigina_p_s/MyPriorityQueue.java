@@ -7,7 +7,7 @@ public class MyPriorityQueue<T extends Comparable<T>> extends MyLinkedList<T> im
             addLast(value);
         else {
             ListNode cur = head;
-            while (cur.getNext() != null && value.compareTo(cur.getNext().getValue())>0) {
+            while (cur.getNext() != null && value.compareTo((T) cur.getNext().getValue())>0) {
                 cur = cur.getNext();
             }
             ListNode node = new ListNode(value, cur.getNext());
