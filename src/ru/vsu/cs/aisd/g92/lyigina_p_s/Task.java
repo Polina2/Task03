@@ -2,9 +2,9 @@ package ru.vsu.cs.aisd.g92.lyigina_p_s;
 
 public class Task implements Comparable<Task>{
     private final int X;
-    private final int N;
-    private final int P;
-    private final int time;
+    private int N;
+    private int P;
+    private int time;
     private int start;
     private int end;
 
@@ -13,6 +13,12 @@ public class Task implements Comparable<Task>{
         this.N = N;
         this.P = P;
         this.time = t;
+    }
+
+    public Task(int X, int start, int end) {
+        this.X = X;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -48,6 +54,14 @@ public class Task implements Comparable<Task>{
 
     public void setEnd(int e) {
         end = e;
+    }
+
+    public int getX() {
+        return X;
+    }
+
+    public int getP() {
+        return P;
     }
 
     public static Task toTask(String str) {
