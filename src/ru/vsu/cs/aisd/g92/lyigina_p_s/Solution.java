@@ -4,12 +4,13 @@ import java.util.PriorityQueue;
 
 public class Solution {
     public static void stdQueueSolution(Task[] data) {
-        int curTime = 0;
         PriorityQueue<Task> queue = new PriorityQueue<>();
+        queue.add(data[0]);
+        int curTime = data[0].getTime();
         int i = 0;
-        while (i < data.length) {
-            while (i < data.length && data[i].getTime() <= curTime) {
-                queue.add(data[i++]);
+        while (!queue.isEmpty()) {
+            while (i+1 < data.length && data[i+1].getTime() <= curTime) {
+                queue.add(data[++i]);
             }
             Task task = queue.remove();
             if (task.getTime() > curTime)
@@ -21,12 +22,13 @@ public class Solution {
     }
 
     public static void myQueueSolution(Task[] data) throws Exception {
-        int curTime = 0;
         MyPriorityQueue<Task> queue = new MyPriorityQueue<>();
+        queue.add(data[0]);
+        int curTime = data[0].getTime();
         int i = 0;
-        while (i < data.length) {
-            while (i < data.length && data[i].getTime() <= curTime) {
-                queue.add(data[i++]);
+        while (!queue.isEmpty()) {
+            while (i+1 < data.length && data[i+1].getTime() <= curTime) {
+                queue.add(data[++i]);
             }
             Task task = queue.remove();
             if (task.getTime() > curTime)
