@@ -1,18 +1,30 @@
 package ru.vsu.cs.aisd.g92.lyigina_p_s;
 
+import java.util.Comparator;
+
 public class MyPriorityQueue<T extends Comparable<T>> extends MyLinkedList<T> implements MyQueue<T> {
+    private Comparator<T> comparator;
+
+    MyPriorityQueue(Comparator<T> comparator) {
+        this.comparator = comparator;
+    }
+
+    MyPriorityQueue() {
+
+    }
+
     @Override
     public void add(T value) {
         if (isEmpty())
             addLast(value);
         else {
             ListNode cur = head;
-            if (value.compareTo(cur.getValue())<0) {
+            if (comparator.compare(value, cur.getValue()) < 0) {
                 head = new ListNode(value, cur);
                 size++;
                 return;
             }
-            while (cur.getNext() != null && value.compareTo((T) cur.getNext().getValue())>0) {
+            while (cur.getNext() != null && comparator.compare(value, cur.getNext().getValue()) > 0) {
                 cur = cur.getNext();
             }
             ListNode node = new ListNode(value, cur.getNext());

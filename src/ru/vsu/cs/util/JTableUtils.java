@@ -162,7 +162,7 @@ public class JTableUtils {
         JTable table, int defaultColWidth,
         boolean showRowsIndexes, boolean showColsIndexes,
         boolean changeRowsCountButtons, boolean changeColsCountButtons,
-        int changeButtonsSize, int changeButtonsMargin
+        int changeButtonsSize, int changeButtonsMargin, String[] headers
     ) {
         table.setCellSelectionEnabled(true);
         table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -180,10 +180,15 @@ public class JTableUtils {
         //table.setCursor(Cursor.getDefaultCursor());
         table.putClientProperty("terminateEditOnFocusLost", true);
 
+        //String[] headers = new String[]{"X", "N", "P", "time"};
         DefaultTableModel tableModel = new DefaultTableModel(new String[] { "[0]" }, 1) {
             @Override
             public String getColumnName(int index) {
-                return String.format("[%d]", index);
+                //return String.format("[%d]", index);
+                if (index < headers.length)
+                    return headers[index];
+                else
+                    return String.format("[%d]", index);
             }
         };
         table.setModel(tableModel);
@@ -360,12 +365,12 @@ public class JTableUtils {
     public static void initJTableForArray(
         JTable table, int defaultColWidth,
         boolean showRowsIndexes, boolean showColsIndexes,
-        boolean changeRowsCountButtons, boolean changeColsCountButtons
+        boolean changeRowsCountButtons, boolean changeColsCountButtons, String[] headers
     ) {
         initJTableForArray(
             table, defaultColWidth,
             showRowsIndexes, showColsIndexes, changeRowsCountButtons, changeColsCountButtons,
-            22, DEFAULT_GAP
+            22, DEFAULT_GAP, headers
         );
     }
 

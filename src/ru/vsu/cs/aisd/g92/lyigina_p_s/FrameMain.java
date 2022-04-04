@@ -5,6 +5,9 @@ import ru.vsu.cs.util.JTableUtils;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -21,6 +24,9 @@ public class FrameMain extends JFrame {
     private JButton buttonStdSolution;
     private JButton buttonMySolution;
     private JButton buttonSave;
+    private DefaultTableModel tableModel;
+    private String[] headers1 = new String[]{"X", "N", "P", "Time"};
+    private String[] headers2 = new String[]{"X", "Start", "End"};
 
     public FrameMain() {
         this.setTitle("FrameMain");
@@ -39,8 +45,61 @@ public class FrameMain extends JFrame {
         fileChooserSave.setDialogType(JFileChooser.SAVE_DIALOG);
         fileChooserSave.setApproveButtonText("Save");
 
-        JTableUtils.initJTableForArray(tableInput, 90, true, false, true, false);
-        JTableUtils.initJTableForArray(tableOutput, 70, true, false, false, false);
+        JTableUtils.initJTableForArray(tableInput, 100, true, true, true, true, headers1);
+        JTableUtils.initJTableForArray(tableOutput, 70, true, true, false, false, headers2);
+/*
+        DefaultTableModel tableModel1 = new DefaultTableModel(new String[] { "[0]" }, 1) {
+            @Override
+            public String getColumnName(int index) {
+                return headers[index];
+            }
+        };
+
+ */
+       // tableModel = new DefaultTableModel();
+        //tableModel.setColumnIdentifiers(headers);
+        //tableInput.setModel(tableModel);
+/*
+        tableInput.setColumnModel(new DefaultTableColumnModel(){
+            @Override
+            public int getColumnCount() {
+                return 4;
+            }
+
+        });
+
+ */
+/*
+        class TableWithColumns extends AbstractTableModel {
+            private String[] names;
+
+            public TableWithColumns(String[] names) {
+                this.names = names;
+            }
+
+            @Override
+            public int getRowCount() {
+                return 0;
+            }
+
+            @Override
+            public int getColumnCount() {
+                return names.length;
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return names[column];
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                return null;
+            }
+        }
+
+        tableInput.setModel(new TableWithColumns(new String[]{"aaa", "bbb", "ccc", "ddd"}));
+*/
 
         buttonRead.addActionListener(new ActionListener() {
             @Override

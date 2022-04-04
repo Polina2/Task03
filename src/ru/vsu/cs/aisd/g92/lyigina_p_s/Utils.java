@@ -19,7 +19,8 @@ public class Utils {
     }
 
     public static void arrayToTable(Task[] arr, JTable table, boolean isInput) {
-        String[][] strArr = new String[arr.length+1][(isInput)?4:3];
+        String[][] strArr = new String[arr.length][(isInput)?4:3];
+        /*
         strArr[0][0] = "X";
         if (isInput) {
             strArr[0][1] = "Number of pages";
@@ -29,15 +30,16 @@ public class Utils {
             strArr[0][1] = "Start";
             strArr[0][2] = "End";
         }
+        */
         for (int i = 0; i < arr.length; i++) {
-            strArr[i+1][0] = "" + arr[i].getX();
+            strArr[i][0] = "" + arr[i].getX();
             if (isInput) {
-                strArr[i+1][1] = "" + arr[i].getN();
-                strArr[i+1][2] = "" + arr[i].getP();
-                strArr[i+1][3] = "" + arr[i].getTime();
+                strArr[i][1] = "" + arr[i].getN();
+                strArr[i][2] = "" + arr[i].getP();
+                strArr[i][3] = "" + arr[i].getTime();
             } else {
-                strArr[i+1][1] = "" + arr[i].getStart();
-                strArr[i+1][2] = "" + arr[i].getEnd();
+                strArr[i][1] = "" + arr[i].getStart();
+                strArr[i][2] = "" + arr[i].getEnd();
             }
         }
         JTableUtils.writeArrayToJTable(table, strArr);
@@ -45,14 +47,14 @@ public class Utils {
 
     public static Task[] tableToArray(JTable table, boolean isInput) {
         String[][] strArray = JTableUtils.readStringMatrixFromJTable(table);
-        Task[] arr = new Task[Objects.requireNonNull(strArray).length - 1];
+        Task[] arr = new Task[Objects.requireNonNull(strArray).length];
         for (int i = 0; i < arr.length; i++) {
             if (isInput) {
-                arr[i] = new Task(Integer.parseInt(strArray[i+1][0]), Integer.parseInt(strArray[i+1][1]),
-                        Integer.parseInt(strArray[i+1][2]), Integer.parseInt(strArray[i+1][3]));
+                arr[i] = new Task(Integer.parseInt(strArray[i][0]), Integer.parseInt(strArray[i][1]),
+                        Integer.parseInt(strArray[i][2]), Integer.parseInt(strArray[i][3]));
             } else {
-                arr[i] = new Task(Integer.parseInt(strArray[i+1][0]), Integer.parseInt(strArray[i+1][1]),
-                        Integer.parseInt(strArray[i+1][2]));
+                arr[i] = new Task(Integer.parseInt(strArray[i][0]), Integer.parseInt(strArray[i][1]),
+                        Integer.parseInt(strArray[i][2]));
             }
         }
         return arr;
@@ -61,7 +63,7 @@ public class Utils {
     public static void arrayToFile(Task[] arr, String fileName) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(fileName);
         for (Task task : arr) {
-            out.println(task.getX() + ' ' + task.getStart() + ' ' + task.getEnd());
+            out.println("" + task.getX() + " " + task.getStart() + " " + task.getEnd());
         }
     }
 }
